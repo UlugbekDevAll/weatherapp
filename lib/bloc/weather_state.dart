@@ -1,6 +1,22 @@
 part of 'weather_bloc.dart';
 
-@freezed
-class WeatherState with _$WeatherState {
-  const factory WeatherState.initial() = _Initial;
+sealed class WeatherState extends Equatable {
+  const WeatherState();
+
+  @override
+  List<Object> get props => [];
+}
+
+final class WeatherInitial extends WeatherState {}
+
+final class WeatherBlocLoading extends WeatherState {}
+
+final class WeatherBlocFailure extends WeatherState {}
+
+final class WeatherBlocSuccess extends WeatherState {
+  final Weather _weather;
+
+  const WeatherBlocSuccess(this._weather);
+  @override
+  List<Object> get props => [_weather];
 }
